@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import type { CardType } from "../../components/Card.astro";
+
+const response = await fetch(`${import.meta.env.API_URL}/articles?populate=image`);
+const results = await response.json();
+const articles = results.data?.map((article: any) => {
+  return {
+    id: article.id,
+    titre: article.attributes.titre,
+    contenu: article.attributes.contenu,
+    image: article.attributes.image
+  }
+});
+---
+
+<Layout title="Cards">
+  <h1 class="p-4 text-2xl font-semibold uppercase text-black">Articles</h1>
+  <div class="p-4">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      {articles.map((article: CardType) => <a href={`articles/${article.id}`}><Card title={article.titre} content={article.contenu} image={article.image} /></a>)}
+    </ul>
+  </div>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import { Picture } from "@astrojs/image/components";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.API_URL}/articles?populate=image`);
+  const articles = await response.json();
+
+  return articles?.data?.map((article) => {
+    return {
+      params: { article: article.id },
+      props: { article },
+    };
+  });
+}
+
+let { article } = Astro.props;
+article = article.attributes;
+---
+
+<Layout title={article.titre}>
+  <Picture
+    src={import.meta.env.PUBLIC_URL + article.image.data.attributes.url}
+    alt={article.image.data.attributes.alternativeText}
+    widths={[300, 600, 900, 1200, 1920]}
+    sizes="100vw"
+    aspectRatio="6:1"
+  />
+  <div class="p-4">
+    <div class="rounded-lg bg-white shadow-lg p-3">
+      <h1 class="text-lg text-black font-semibold">{article.titre}</h1>
+      <p class="text-slate-600 text-justify">{article.contenu}</p>
+    </div>
+  </div>
+</Layout>
