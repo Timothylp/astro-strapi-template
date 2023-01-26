@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+type PageType = {
+  id: string;
+  attributes: {
+    titre: string;
+    slug: any;
+  };
+};
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.API_URL}/pages`);
+  const pages = await response.json();
+
+  return pages?.data?.map((page: PageType) => {
+    const slug = page.attributes.slug == null ? undefined : page.attributes.slug;
+    const titre = page.attributes.titre;
+    return {
+      params: { slug: slug },
+      props: { titre },
+    };
+  });
+}
+
+const { titre } = Astro.props;
+---
+
+<Layout title={titre}>
+    <div class="container">
+        <h1>{titre}</h1>
+    </div>
+</Layout>

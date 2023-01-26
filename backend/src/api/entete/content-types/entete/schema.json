@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "entetes",
+  "info": {
+    "singularName": "entete",
+    "pluralName": "entetes",
+    "displayName": "Entête",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "menu": {
+      "displayName": "Lien",
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.lien"
+    }
+  }
+}

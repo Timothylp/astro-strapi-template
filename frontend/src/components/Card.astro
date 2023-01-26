@@ -1,20 +1,6 @@
 ---
 import { Picture } from "@astrojs/image/components";
 
-export type CardType = {
-  id: string;
-  titre: string;
-  contenu: string;
-  image: {
-    data: {
-      attributes: {
-        url: string;
-        alternativeText: string;
-      };
-    };
-  };
-};
-
 const { title, content, image } = Astro.props;
 ---
 

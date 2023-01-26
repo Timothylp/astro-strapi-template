@@ -1,12 +1,13 @@
 ---
 import { Picture } from "@astrojs/image/components";
 import Layout from "../../layouts/Layout.astro";
+import type { ArticleType } from "../../types/ArticleType";
 
 export async function getStaticPaths() {
   const response = await fetch(`${import.meta.env.API_URL}/articles?populate=image`);
   const articles = await response.json();
 
-  return articles?.data?.map((article) => {
+  return articles?.data?.map((article: ArticleType) => {
     return {
       params: { article: article.id },
       props: { article },

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_navigation_liens",
+  "info": {
+    "displayName": "Lien"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
